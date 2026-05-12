@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase Confirmed - Telecel</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #E30613 0%, #0033A0 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            text-align: center;
+        }
+        
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #27AE60 0%, #229954 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            color: white;
+            animation: scaleIn 0.5s ease;
+        }
+        
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #27AE60;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+        
+        .details-box {
+            background: #f8f9fc;
+            border-left: 4px solid #E30613;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+        
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #0033A0;
+        }
+        
+        .detail-value {
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            flex-direction: column;
+        }
+        
+        .btn {
+            padding: 14px 24px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #E30613 0%, #0033A0 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(227, 6, 19, 0.25);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(227, 6, 19, 0.35);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #E30613;
+            border: 2px solid #E30613;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(227, 6, 19, 0.05);
+        }
+        
+        .info-text {
+            color: #999;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .subtitle {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✓</div>
+        
+        <h1>Purchase Confirmed!</h1>
+        <p class="subtitle">
+            Your data bundle has been successfully activated. Your data is now available for immediate use.
+        </p>
+        
+        <div class="details-box" id="detailsBox" style="display: none;">
+            <div class="detail-row">
+                <span class="detail-label">Account Type:</span>
+                <span class="detail-value" id="accountType">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Account Number:</span>
+                <span class="detail-value" id="accountNumber">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Bundle:</span>
+                <span class="detail-value" id="bundleInfo">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Price:</span>
+                <span class="detail-value" id="bundlePrice">-</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Status:</span>
+                <span class="detail-value" style="color: #27AE60; font-weight: 700;">✓ Active</span>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-primary" onclick="window.location.href='index.html'">
+                ← Back to Bundles
+            </button>
+            <button class="btn btn-secondary" onclick="downloadReceipt()">
+                📥 Download Receipt
+            </button>
+        </div>
+        
+        <p class="info-text">
+            Your data will be available within 2-5 minutes. You can check your balance by dialing *123#
+        </p>
+    </div>
+
+    <script>
+        // Load and display saved purchase details
+        function loadPurchaseDetails() {
+            const accountType = localStorage.getItem('accountType');
+            const accountNumber = localStorage.getItem('accountNumber');
+            const selectedBundle = localStorage.getItem('selectedBundle');
+            const bundlePrice = localStorage.getItem('bundlePrice');
+            
+            if (accountType && accountNumber) {
+                document.getElementById('detailsBox').style.display = 'block';
+                document.getElementById('accountType').textContent = accountType.charAt(0).toUpperCase() + accountType.slice(1);
+                document.getElementById('accountNumber').textContent = accountNumber;
+                document.getElementById('bundleInfo').textContent = selectedBundle ? selectedBundle.toUpperCase() : 'N/A';
+                document.getElementById('bundlePrice').textContent = bundlePrice ? `GHS ${bundlePrice}` : 'N/A';
+            }
+        }
+        
+        function downloadReceipt() {
+            const accountType = localStorage.getItem('accountType');
+            const accountNumber = localStorage.getItem('accountNumber');
+            const selectedBundle = localStorage.getItem('selectedBundle');
+            const bundlePrice = localStorage.getItem('bundlePrice');
+            const timestamp = new Date().toLocaleString();
+            
+            const receiptContent = `
+TELECEL DATA BUNDLE RECEIPT
+====================================
+
+Transaction Date: ${timestamp}
+Transaction ID: TXN-${Date.now()}
+
+ACCOUNT DETAILS
+Account Type: ${accountType}
+Account Number: ${accountNumber}
+
+BUNDLE DETAILS
+Bundle: ${selectedBundle}
+Price: GHS ${bundlePrice}
+Status: ACTIVE
+
+TERMS & CONDITIONS
+- Data never expires
+- Can be used across all Telecel networks
+- Unused data rolls over monthly
+- For support, call +233 501 234 567
+
+Thank you for choosing Telecel!
+====================================
+            `;
+            
+            const element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(receiptContent));
+            element.setAttribute('download', `telecel-receipt-${Date.now()}.txt`);
+            element.style.display = 'none';
+            document.body.appendChild(element);
+            element.click();
+            document.body.removeChild(element);
+        }
+        
+        // Load details on page load
+        window.addEventListener('load', loadPurchaseDetails);
+    </script>
+</body>
+</html>
